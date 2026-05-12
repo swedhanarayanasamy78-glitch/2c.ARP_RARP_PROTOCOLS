@@ -24,13 +24,14 @@ s=socket.socket()
 s.bind(('localhost',8000))
 s.listen(5)
 c,addr=s.accept()
-address={"fe80::8f5e:49c:a806:cb62%15":"A8:59:5F:F0:0F:C3","165.165.79.1":"8A:BC:E3:FA"};
+address={"10.166.17.34":"A8:59:5F:F0:0F:C3","165.165.79.1":"8A:BC:E3:FA"};
 while True:
     ip=c.recv(1024).decode()
     try:
        c.send(address[ip].encode())
     except KeyError:
        c.send("Not Found".encode())
+
 ```
 server
 ```
@@ -44,7 +45,7 @@ while True:
 ```
 
 ## OUPUT - ARP
-<img width="1778" height="907" alt="Screenshot 2026-05-12 131349" src="https://github.com/user-attachments/assets/b44c4694-0cdd-4b90-962c-b5cb9972d499" />
+<img width="1773" height="880" alt="image" src="https://github.com/user-attachments/assets/13b9c4e9-bf8f-4115-868e-514ef87a0006" />
 
 ## PROGRAM - RARP
 client
@@ -57,7 +58,7 @@ print("RARP Server is listening on port 8001...")
 c, addr = s.accept()
 
 address = {
-    "A8:59:5F:F0:0F:C3": "fe80::8f5e:49c:a806:cb62%15",
+    "A8:59:5F:F0:0F:C3": "10.166.17.34",
     "8A:BC:E3:FA": "165.165.79.1"
 }
 
@@ -66,6 +67,7 @@ while True:
     print(f"Received MAC: {mac}")
     ip = address.get(mac, "Not Found")
     c.send(ip.encode())
+
 ```
 server
 ```
@@ -80,7 +82,7 @@ while True:
     print("IP Address:", s.recv(1024).decode()
 ```
 ## OUPUT -RARP
-<img width="1739" height="846" alt="Screenshot 2026-05-12 132313" src="https://github.com/user-attachments/assets/4ae625f3-7114-4fe0-95ec-15bc7e418fce" />
+<img width="1683" height="784" alt="Screenshot 2026-05-12 134511" src="https://github.com/user-attachments/assets/8f19a6b5-ff04-4b5a-8a9d-083fb96a4cb8" />
 
 ## RESULT
 Thus, the python program for simulating ARP protocols using TCP was successfully 
